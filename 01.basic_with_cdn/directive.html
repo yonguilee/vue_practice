@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <!-- basic v-model -->
+        <h3>1. v-model</h3>
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+
+        <!-- v-model with 조건문 -->
+        <h3>2. v-model & 조건문 </h3>
+        <input type="checkbox" id="chk1" v-model="chkResult">
+        <label for="chk1">{{ chkResult ? 'yes' : 'no' }}</label>
+
+        <!-- v-on with v-if -->
+        <h3>3. v-on & v-if</h3>
+        <button type="button" @click="displayMsg">show secret msg</button>
+        <p v-if="showMsg">This is secret msg!</p>
+
+        <h3>4. v-for</h3>
+        <ul>
+            <li v-for="(item,index) in groceryList" :key="index">
+                <img :src="'img/img_grocery'+ (index+1) +'.png'" alt="">
+                <p>{{ index+1 }}</p>
+                <p>name : {{ item.name }}</p>
+                <p>price : {{ item.price }}</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data : {
+                message: '',
+                chkResult: '',
+                showMsg:false,
+                groceryList: [
+                    { name: 'Carrot', price: 3000},
+                    { name: 'Tomato', price: 1500},
+                    { name: 'Cucumber', price: 1000}
+                ]
+            },
+            methods: {
+                displayMsg : function() {
+                    if(this.showMsg){
+                        this.showMsg = false;
+                    } else{
+                        this.showMsg = true;
+                    }
+                }
+            }
+        }) 
+    </script>
+</body>
+</html>
